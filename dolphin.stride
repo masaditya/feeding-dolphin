@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="dolphin" extends="Actor" extends-java="Actor" enable="true" strideversion="1">
+    <javadoc xml:space="preserve"/>
+    <imports>
+        <import target="java.util.*" enable="true"/>
+        <import target="greenfoot.*" enable="true"/>
+    </imports>
+    <implements/>
+    <fields>
+        <variable access="public" type="int" type-java="int" name="score" enable="true"/>
+        <variable access="private" type="int" type-java="int" name="timer" value="6000" value-java="6000" enable="true"/>
+        <variable access="private" type="int" type-java="int" name="timershow" value="timer/1000" value-java="timer / 1000" enable="true"/>
+        <variable access="public" type="int" type-java="int" name="count" value="0" value-java="0" enable="true"/>
+    </fields>
+    <constructors/>
+    <methods>
+        <method access="public" type="void" type-java="void" name="act" enable="true">
+            <javadoc xml:space="preserve">Act - do whatever the dolphin wants to do. This method is called whenever the 'Act' or 'Run' button gets pressed in the environment.</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <if condition="timer&gt;0" condition-java="timer &gt; 0" enable="true">
+                    <ifStatements>
+                        <assign dest="timer" dest-java="timer" src="timer-1" src-java="timer - 1" enable="true"/>
+                        <if condition="timer==0" condition-java="timer == 0" enable="true">
+                            <ifStatements>
+                                <call expression="Greenfoot.stop()" expression-java="Greenfoot.stop()" enable="true"/>
+                                <call expression="getWorld().showText(&quot;Game over ! &quot;,300,180)" expression-java="getWorld().showText(&quot;Game over ! &quot;, 300, 180)" enable="true"/>
+                                <call expression="getWorld().showText(&quot;Your Score = &quot;+score,300,200)" expression-java="getWorld().showText(&quot;Your Score = &quot; + score, 300, 200)" enable="true"/>
+                            </ifStatements>
+                        </if>
+                    </ifStatements>
+                </if>
+                <assign dest="timershow" dest-java="timershow" src="timer/100" src-java="timer / 100" enable="true"/>
+                <call expression="getWorld().showText(&quot;Timer = &quot;+timershow,50,50)" expression-java="getWorld().showText(&quot;Timer = &quot; + timershow, 50, 50)" enable="true"/>
+                <call expression="getWorld().showText(&quot;Score = &quot;+score,50,20)" expression-java="getWorld().showText(&quot;Score = &quot; + score, 50, 20)" enable="true"/>
+                <if condition="Greenfoot.isKeyDown(&quot;up&quot;)" condition-java="Greenfoot.isKeyDown(&quot;up&quot;)" enable="true">
+                    <ifStatements>
+                        <call expression="move(2)" expression-java="move(2)" enable="true"/>
+                    </ifStatements>
+                </if>
+                <if condition="Greenfoot.isKeyDown(&quot;down&quot;)" condition-java="Greenfoot.isKeyDown(&quot;down&quot;)" enable="true">
+                    <ifStatements>
+                        <call expression="move(-2)" expression-java="move(-2)" enable="true"/>
+                    </ifStatements>
+                </if>
+                <if condition="Greenfoot.isKeyDown(&quot;right&quot;)" condition-java="Greenfoot.isKeyDown(&quot;right&quot;)" enable="true">
+                    <ifStatements>
+                        <call expression="turn(2)" expression-java="turn(2)" enable="true"/>
+                    </ifStatements>
+                </if>
+                <if condition="Greenfoot.isKeyDown(&quot;left&quot;)" condition-java="Greenfoot.isKeyDown(&quot;left&quot;)" enable="true">
+                    <ifStatements>
+                        <call expression="turn(-2)" expression-java="turn(-2)" enable="true"/>
+                    </ifStatements>
+                </if>
+                <if condition="isTouching(fish.class)" condition-java="isTouching(fish.class)" enable="true">
+                    <ifStatements>
+                        <call expression="eatfish()" expression-java="eatfish()" enable="true"/>
+                    </ifStatements>
+                </if>
+                <if condition="isTouching(lion.class)" condition-java="isTouching(lion.class)" enable="true">
+                    <ifStatements>
+                        <call expression="eatlion()" expression-java="eatlion()" enable="true"/>
+                    </ifStatements>
+                </if>
+            </body>
+        </method>
+        <method access="public" type="void" type-java="void" name="eatfish" enable="true">
+            <javadoc xml:space="preserve"/>
+            <params/>
+            <throws/>
+            <body>
+                <assign dest="count" dest-java="count" src="count+1" src-java="count + 1" enable="true"/>
+                <if condition="count%5==0" condition-java="count % 5 == 0" enable="true">
+                    <ifStatements>
+                        <call expression="getWorld().addObject(new lion(),Greenfoot.getRandomNumber(600),Greenfoot.getRandomNumber(400))" expression-java="getWorld().addObject( new lion(), Greenfoot.getRandomNumber(600), Greenfoot.getRandomNumber(400))" enable="true"/>
+                    </ifStatements>
+                    <else>
+                        <call expression="getWorld().addObject(new fish(),Greenfoot.getRandomNumber(600),Greenfoot.getRandomNumber(400))" expression-java="getWorld().addObject( new fish(), Greenfoot.getRandomNumber(600), Greenfoot.getRandomNumber(400))" enable="true"/>
+                    </else>
+                </if>
+                <assign dest="score" dest-java="score" src="score+1" src-java="score + 1" enable="true"/>
+                <call expression="removeTouching(fish.class)" expression-java="removeTouching(fish.class)" enable="true"/>
+                <blank/>
+            </body>
+        </method>
+        <method access="public" type="void" type-java="void" name="eatlion" enable="true">
+            <javadoc xml:space="preserve"/>
+            <params/>
+            <throws/>
+            <body>
+                <assign dest="count" dest-java="count" src="count+1" src-java="count + 1" enable="true"/>
+                <call expression="removeTouching(lion.class)" expression-java="removeTouching(lion.class)" enable="true"/>
+                <assign dest="score" dest-java="score" src="score+5" src-java="score + 5" enable="true"/>
+                <call expression="getWorld().addObject(new fish(),Greenfoot.getRandomNumber(600),Greenfoot.getRandomNumber(400))" expression-java="getWorld().addObject( new fish(), Greenfoot.getRandomNumber(600), Greenfoot.getRandomNumber(400))" enable="true"/>
+            </body>
+        </method>
+    </methods>
+</class>

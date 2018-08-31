@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="water" extends="World" extends-java="World" enable="true" strideversion="1">
+    <javadoc xml:space="preserve"/>
+    <imports>
+        <import target="java.util.*" enable="true"/>
+        <import target="greenfoot.*" enable="true"/>
+    </imports>
+    <implements/>
+    <fields/>
+    <constructors>
+        <constructor access="public" enable="true">
+            <javadoc xml:space="preserve">Constructor for objects of class water.</javadoc>
+            <params/>
+            <throws/>
+            <delegate target="super" params="600,400,1" params-java="600, 400, 1"/>
+            <body>
+                <call expression="prepare()" expression-java="prepare()" enable="true"/>
+            </body>
+        </constructor>
+    </constructors>
+    <methods>
+        <method access="private" type="void" type-java="void" name="prepare" enable="true">
+            <javadoc xml:space="preserve">Prepare the world for the start of the program.
+That is: create the initial objects and add them to the world.</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <variable type="dolphin" type-java="dolphin" name="dolphin" value="new dolphin()" value-java=" new dolphin()" enable="true"/>
+                <call expression="addObject(dolphin,131,139)" expression-java="addObject(dolphin, 131, 139)" enable="true"/>
+                <variable type="fish" type-java="fish" name="fish" value="new fish()" value-java=" new fish()" enable="true"/>
+                <call expression="addObject(fish,406,236)" expression-java="addObject(fish, 406, 236)" enable="true"/>
+            </body>
+        </method>
+    </methods>
+</class>
